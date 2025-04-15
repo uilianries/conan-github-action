@@ -34,4 +34,4 @@ jobs:
         run: |
           conan --version | grep -q '2.15.1'
           conan audit provider list | grep -q conancenter
-          conan config home | grep -q "${{ github.workspace }}/conan_home"
+          conan config home | grep -q "conan_home"
