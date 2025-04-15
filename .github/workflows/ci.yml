@@ -23,4 +23,7 @@ jobs:
           config_target_folder: 'profiles'
 
       - name: Verify action results
-        run: conan --version
+        shell: bash
+        run: |
+          conan --version | grep -q '2.15.1'
+          conan profile list | grep -q 'arm-toolchain'
