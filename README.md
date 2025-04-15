@@ -39,12 +39,12 @@ This Github Action offers options inputs to execute extra steps just after insta
 This is useful for installing custom configurations or applying any other setup you need.
 It's possible to customize the action using the following options:
 
-| Option         | Description                                                                                 |
-|----------------|---------------------------------------------------------------------------------------------|
-| `version`      | Conan client version to be installed. By default, it's the latest version available.        |
-| `home`         | A custom path to be used as Conan cache directory.                                          |
-| `audit_token`  | The Conan audit token to authenticate to the Audit server with Conan.                       |
-| `config_url`   | The URL of the Git repository containing the custom Conan configurations to be installed.   |
+| Option         | Description                                                                                                    |
+|----------------|----------------------------------------------------------------------------------------------------------------|
+| `version`      | Conan client version to be installed. By default, it's the latest version available.                           |
+| `home`         | A custom path to be used as Conan cache directory.                                                             |
+| `audit_token`  | The Conan audit token to authenticate to the Audit server with Conan.                                          |
+| `config_urls`  | URLs of the Git repositories containing the custom Conan configurations to be installed. It's comma separated  |
 
 
 ## License
