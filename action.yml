@@ -3,9 +3,9 @@ description: 'A GitHub Action to install and configure the Conan client'
 author: 'Conan.io <info@conan.io>'
 inputs:
   version:
-    description: 'Conan version to install (default: latest)'
+    description: 'Version of Conan to install'
     required: false
-    default: 'latest'
+    default: ''
   config_url:
     description: 'URL to a Conan configuration repository to be installed'
     required: false
@@ -34,10 +34,10 @@ runs:
     - name: 'Install Conan'
       shell: bash
       run: |
-        if [ "${{ inputs.version }}" = "latest" ]; then
-          pip install conan
-        else
+        if [ -n "${{ inputs.conan_version }}" ]; then
           pip install conan==${{ inputs.version }}
+        else
+          pip install conan
 
     - name: 'Configure Conan'
       if: ${{ inputs.config_url != '' }}
