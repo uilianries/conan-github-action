@@ -9,7 +9,14 @@ on:
 
 jobs:
   testing-action:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Execute checkout
         uses: actions/checkout@v4
@@ -21,6 +28,7 @@ jobs:
           config_url: 'https://github.com/conan-io/examples2.git'
           config_source_folder: 'examples/cross_build/toolchain_packages/profiles'
           config_target_folder: 'profiles'
+          audit_token: ${{ secrets.CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER }}
 
       - name: Verify action results
         shell: bash
