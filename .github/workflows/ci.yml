@@ -18,7 +18,7 @@ jobs:
         uses: ./
         with:
           version: '2.15.1'
-          config_url: 'https://github.com/conan-io/examples2'
+          config_url: 'https://github.com/conan-io/examples2.git'
           config_source_folder: 'examples/cross_build/toolchain_packages/profiles'
           config_target_folder: 'profiles'
 
