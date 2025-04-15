@@ -1,0 +1,25 @@
+name: Validate Conan Action
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  testing-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute checkout
+        uses: actions/checkout@v4
+
+      - name: Consume Conan Action
+        uses: ./
+        with:
+          version: '2.15.1'
+          config_url: 'https://github.com/conan-io/examples2'
+          config_source_folder: 'examples/cross_build/toolchain_packages/profiles'
+          config_target_folder: 'profiles'
+
+      - name: Verify action results
+        run: conan --version

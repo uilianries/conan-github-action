@@ -1,0 +1,53 @@
+name: 'Conan.io GitHub Action'
+description: 'A GitHub Action to install and configure the Conan client'
+author: 'Conan.io <info@conan.io>'
+inputs:
+  version:
+    description: 'Conan version to install (default: latest)'
+    required: false
+    default: 'latest'
+  config_url:
+    description: 'URL to a Conan configuration repository to be installed'
+    required: false
+    default: ''
+  config_source_folder:
+    description: 'Install files only from a source subfolder from the specified origin'
+    required: false
+    default: ''
+  config_target_folder:
+    description: 'Install to that path in the conan cache'
+    required: false
+    default: ''
+  audit_token:
+    description: 'Conan audit token to be used for authentication'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Install Python'
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 'Install Conan'
+      run: |
+        if [ "${{ inputs.version }}" = "latest" ]; then
+          pip install conan
+        else
+          pip install conan==${{ inputs.version }}
+
+    - name: 'Configure Conan'
+      if: ${{ inputs.config_url != '' }}
+      run: |
+        conan config install ${{ inputs.config_url }} -sf ${{ inputs.config_source_folder }} -tf ${{ inputs.config_target_folder }}
+
+    - name: 'Authenticate Audit'
+      if: ${{ inputs.audit_token != '' }}
+      run: |
+        conan audit provider auth conancenter --token=${{ inputs.audit_token }}
+
+branding:
+  icon: 'package'
+  color: 'blue'
