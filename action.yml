@@ -32,6 +32,7 @@ runs:
         python-version: '3.10'
 
     - name: 'Install Conan'
+      shell: bash
       run: |
         if [ "${{ inputs.version }}" = "latest" ]; then
           pip install conan
@@ -40,11 +41,13 @@ runs:
 
     - name: 'Configure Conan'
       if: ${{ inputs.config_url != '' }}
+      shell: bash
       run: |
         conan config install ${{ inputs.config_url }} -sf ${{ inputs.config_source_folder }} -tf ${{ inputs.config_target_folder }}
 
     - name: 'Authenticate Audit'
       if: ${{ inputs.audit_token != '' }}
+      shell: bash
       run: |
         conan audit provider auth conancenter --token=${{ inputs.audit_token }}
 
