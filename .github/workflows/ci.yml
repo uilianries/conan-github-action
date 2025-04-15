@@ -33,5 +33,5 @@ jobs:
         shell: bash
         run: |
           conan --version | grep -q '2.15.1'
-          conan profile list | grep -q 'arm-toolchain'
           conan audit provider list | grep -q conancenter
+          conan config home | grep -q "${{ github.workspace }}/conan_home"
