@@ -25,13 +25,13 @@ jobs:
         uses: ./
         with:
           version: '2.15.1'
-          config_url: 'https://github.com/conan-io/examples2.git'
-          config_source_folder: 'examples/cross_build/toolchain_packages/profiles'
-          config_target_folder: 'profiles'
+          config_url: 'https://github.com/conan-io/conan-extensions.git'
           audit_token: ${{ secrets.CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER }}
+          home: ${{ github.workspace }}/conan_home
 
       - name: Verify action results
         shell: bash
         run: |
           conan --version | grep -q '2.15.1'
           conan profile list | grep -q 'arm-toolchain'
+          conan audit provider list | grep -q conancenter

@@ -27,7 +27,7 @@ steps:
     uses: uilianries/conan-github-action@v1
     with:
       audit_token: ${{ secrets.CONAN_AUDIT_TOKEN }}
-      config_url: 'https://github.com/<org>/conan-config.git'
+      config_urls: 'https://github.com/<org>/conan-config.git,https://myrepo.com/conan-config.git'
 
   - name: Install Conan dependencies
     run: conan install . --build=missing
@@ -35,15 +35,16 @@ steps:
 
 ## Options
 
+This Github Action offers options inputs to execute extra steps just after installing Conan.
+This is useful for installing custom configurations or applying any other setup you need.
 It's possible to customize the action using the following options:
 
 | Option         | Description                                                                                 |
 |----------------|---------------------------------------------------------------------------------------------|
 | `version`      | Conan client version to be installed. By default, it's the latest version available.        |
-| `audit_token`  | The Conan audit token to authenticate to the Audit server.                                  |
+| `home`         | A custom path to be used as Conan cache directory.                                          |
+| `audit_token`  | The Conan audit token to authenticate to the Audit server with Conan.                       |
 | `config_url`   | The URL of the Git repository containing the custom Conan configurations to be installed.   |
-| `config_source_folder`  | Install files only from a source subfolder from the specified origin.              |
-| `config_target_folder`  | Install to that path in the conan cache.                                           |
 
 
 ## License

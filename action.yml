@@ -1,50 +1,74 @@
 name: 'Conan.io GitHub Action'
 description: 'A GitHub Action to install and configure the Conan client'
 author: 'Conan.io <info@conan.io>'
+
 inputs:
   version:
     description: 'Version of Conan to install'
     required: false
     default: ''
-  config_url:
-    description: 'URL to a Conan configuration repository to be installed'
-    required: false
-    default: ''
-  config_source_folder:
-    description: 'Install files only from a source subfolder from the specified origin'
-    required: false
-    default: ''
-  config_target_folder:
-    description: 'Install to that path in the conan cache'
+  config_urls:
+    description: 'URLs or paths to a Conan configuration repository to be installed. Use , (comma) to separate multiple URLs'
     required: false
     default: ''
   audit_token:
     description: 'Conan audit token to be used for authentication'
     required: false
     default: ''
+  home:
+    description: 'Custom path for Conan cache directory'
+    required: false
+    default: ''
+
+outputs:
+  conan-version:
+    description: "Conan version"
+    value: ${{ steps.install-conan.outputs.conan-version }}
+  conan-home:
+    description: "Conan cache directory"
+    value: ${{ steps.get-conan-home.outputs.conan-home }}
+
 
 runs:
   using: 'composite'
   steps:
     - name: 'Install Python'
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
+    - name: Set CONAN_HOME
+      if: ${{ inputs.home != '' }}
+      id: export-conan-home
+      shell: bash
+      run: |
+        echo "CONAN_HOME=${{ inputs.home }}" >> $GITHUB_ENV
+
     - name: 'Install Conan'
       shell: bash
+      id: install-conan
       run: |
         if [ -n "${{ inputs.conan_version }}" ]; then
           pip install conan==${{ inputs.version }}
         else
           pip install conan
         fi
+        echo "conan-version=$(conan --version | cut -d' ' -f3)" >> $GITHUB_OUTPUT
+
+    - name: Get Conan cache folder path
+      shell: bash
+      id: get-conan-home
+      run: echo "conan-home=\"$(conan config home)\"" >> $GITHUB_OUTPUT
 
     - name: 'Configure Conan'
       if: ${{ inputs.config_url != '' }}
+      id: configure-conan
       shell: bash
       run: |
-        conan config install ${{ inputs.config_url }} -sf ${{ inputs.config_source_folder }} -tf ${{ inputs.config_target_folder }}
+        IFS=',' read -ra urls <<< "${{ inputs.config_urls }}"
+        for url in "${urls[@]}"; do
+          conan config install "$url"
+        done
 
     - name: 'Authenticate Audit'
       if: ${{ inputs.audit_token != '' }}
