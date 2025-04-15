@@ -61,7 +61,7 @@ runs:
       run: echo "conan-home=\"$(conan config home)\"" >> $GITHUB_OUTPUT
 
     - name: 'Configure Conan'
-      if: ${{ inputs.config_url != '' }}
+      if: ${{ inputs.config_urls != '' }}
       id: configure-conan
       shell: bash
       run: |

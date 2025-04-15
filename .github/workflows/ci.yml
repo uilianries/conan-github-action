@@ -25,7 +25,7 @@ jobs:
         uses: ./
         with:
           version: '2.15.1'
-          config_url: 'https://github.com/conan-io/conan-extensions.git'
+          config_urls: 'https://github.com/conan-io/conan-extensions.git'
           audit_token: ${{ secrets.CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER }}
           home: ${{ github.workspace }}/conan_home
 
