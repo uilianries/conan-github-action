@@ -34,6 +34,7 @@ runs:
   steps:
     - name: 'Install Python'
       uses: actions/setup-python@v5
+      id: setup-python
       with:
         python-version: '3.10'
 
@@ -72,6 +73,7 @@ runs:
 
     - name: 'Authenticate Audit'
       if: ${{ inputs.audit_token != '' }}
+      id: conan-audit-authentication
       shell: bash
       run: |
         conan audit provider auth conancenter --token=${{ inputs.audit_token }}
