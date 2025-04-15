@@ -38,6 +38,7 @@ runs:
           pip install conan==${{ inputs.version }}
         else
           pip install conan
+        fi
 
     - name: 'Configure Conan'
       if: ${{ inputs.config_url != '' }}
