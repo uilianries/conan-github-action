@@ -40,6 +40,13 @@ jobs:
           conan audit provider list | grep -q conancenter
           conan config home | grep -q "conan_home"
 
+      - name: Copy conanmanifest.txt files into workspace
+        shell: bash
+        run: |
+          mkdir -p conan_manifests
+          find ${{ steps.get-conan-home.outputs.conan-home }}/p -name 'conanmanifest.txt' -exec cp --parents {} conan_manifests/ \;
+          find conan_manifests -type f -exec sha256sum {} \;
+
       - name: Validate caching Conan packages
         shell: bash
         run: |
@@ -47,3 +54,10 @@ jobs:
           conan profile detect --force
           conan install -r conancenter --requires=asio/1.31.0 --build=missing
           conan list "*#*"
+
+      - name: Copy conanmanifest.txt files into workspace
+        shell: bash
+        run: |
+          mkdir -p conan_manifests
+          find ${{ steps.get-conan-home.outputs.conan-home }}/p -name 'conanmanifest.txt' -exec cp --parents {} conan_manifests/ \;
+          find conan_manifests -type f -exec sha256sum {} \;
