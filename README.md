@@ -39,12 +39,13 @@ This Github Action offers options inputs to execute extra steps just after insta
 This is useful for installing custom configurations or applying any other setup you need.
 It's possible to customize the action using the following options:
 
-| Option         | Description                                                                                                    |
-|----------------|----------------------------------------------------------------------------------------------------------------|
-| `version`      | Conan client version to be installed. By default, it's the latest version available.                           |
-| `home`         | A custom path to be used as Conan cache directory.                                                             |
-| `audit_token`  | The Conan audit token to authenticate to the Audit server with Conan.                                          |
-| `config_urls`  | URLs of the Git repositories containing the custom Conan configurations to be installed. It's comma separated  |
+| Option           | Type    | Description                                                                                                    |
+|------------------|---------|----------------------------------------------------------------------------------------------------------------|
+| `version`        | string  | Conan client version to be installed. By default, it's the latest version available.                           |
+| `home`           | string  | A custom path to be used as Conan cache directory.                                                             |
+| `audit_token`    | string  | The Conan audit token to authenticate to the Audit server with Conan.                                          |
+| `config_urls`    | list    | URLs of the Git repositories containing the custom Conan configurations to be installed. It's comma separated  |
+| `cache_packages` | boolean | Cache all stored Conan packages, under Conan cache, using Github cache support. false by default               |
 
 
 ## License
