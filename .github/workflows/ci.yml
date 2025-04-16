@@ -45,5 +45,5 @@ jobs:
         run: |
           conan list "*#*"
           conan profile detect --force
-          conan install -r conancenter --requires=asio/1.32.0 --build=missing
+          conan install -r conancenter --requires=asio/1.31.0 --build=missing
           conan list "*#*"
