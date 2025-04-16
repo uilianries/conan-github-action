@@ -69,7 +69,7 @@ runs:
       id: configure-conan
       shell: bash
       run: |
-        IFS=',' read -ra urls <<< "${{ inputs.config_urls }}"
+        IFS=';' read -ra urls <<< "${{ inputs.config_urls }}"
         for url in "${urls[@]}"; do
           conan config install "$url"
         done
