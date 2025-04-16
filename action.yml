@@ -84,18 +84,8 @@ runs:
 
     - name: Restore Conan cache for packages
       if: ${{ inputs.cache_packages == 'true' }}
-      uses: actions/cache/restore@v4
+      uses: actions/cache@v4.2.3
       id: restore-conan-packages
-      with:
-        path: ${{ steps.get-conan-home.outputs.conan-home }}/p
-        key: conan-${{ steps.install-conan.outputs.conan-version }}-${{ runner.os }}-
-        restore-keys: |
-          conan-${{ steps.install-conan.outputs.conan-version }}-${{ runner.os }}-
-
-    - name: 'Cache Conan packages in cache'
-      if: ${{ inputs.cache_packages == 'true' }}
-      id: cache-conan-packages
-      uses: actions/cache/save@v4
       with:
         path: ${{ steps.get-conan-home.outputs.conan-home }}/p
         key: conan-${{ steps.install-conan.outputs.conan-version }}-${{ runner.os }}-${{ hashFiles('**/conanmanifest.txt') }}
