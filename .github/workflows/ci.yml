@@ -44,4 +44,4 @@ jobs:
         shell: bash
         run: |
           conan profile detect --force
-          conan install -r conancenter --requires=fmt/11.1.4 --build=missing
+          conan install -r conancenter --requires=asio/1.32.0 --build=missing
