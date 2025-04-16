@@ -1,6 +1,7 @@
 # Install Conan Action
 
 [![Validate Conan Action](https://github.com/uilianries/conan-github-action/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/uilianries/conan-github-action/actions/workflows/ci.yml)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Conan%20Package%20Manager-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=github)](https://github.com/marketplace/actions/conan-io-github-action)
 
 
 A GitHub Action to install and configure the Conan package manager in your workflow.
