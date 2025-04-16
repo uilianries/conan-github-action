@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: 'Check Python version'
+        shell: bash
+        run: |
+            python --version
+
       - name: Consume Conan Action
         uses: ./
         with:
@@ -37,6 +42,11 @@ jobs:
           audit_token: ${{ secrets.CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER }}
           home: ${{ github.workspace }}/conan_home
           cache_packages: 'true'
+
+      - name: 'Check Python version'
+        shell: bash
+        run: |
+            python --version
 
       - name: Verify action results
         shell: bash
