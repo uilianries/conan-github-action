@@ -21,14 +21,6 @@ jobs:
       - name: Execute checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-
-      - name: 'Check Python version'
-        shell: bash
-        run: |
-            python --version
-
       - name: Consume Conan Action
         uses: ./
         with:
@@ -40,11 +32,7 @@ jobs:
           audit_token: ${{ secrets.CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER }}
           home: ${{ github.workspace }}/conan_home
           cache_packages: 'true'
-
-      - name: 'Check Python version'
-        shell: bash
-        run: |
-            python --version
+          python_version: '3.12'
 
       - name: Verify action results
         shell: bash
@@ -52,6 +40,7 @@ jobs:
           conan --version | grep -q '2.15.1'
           conan audit provider list | grep -q conancenter
           conan config home | grep -q "conan_home"
+          python --version | grep -q '3.12'
 
       - name: Validate caching Conan packages
         shell: bash

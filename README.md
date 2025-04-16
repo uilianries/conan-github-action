@@ -16,6 +16,7 @@ This action provides a simple and flexible way to set up Conan with custom confi
 - 🔍 Support for custom Conan cache directory
 - 🔗 Support for multiple configuration URL
 - 🧩 Support for multiple remote URL
+- 🐍 Python 3.9+ support
 - 💪 Cross-platform support
 - 🔄 Composite action for better reliability
 
@@ -55,6 +56,7 @@ It's possible to customize the action using the following options:
 | `audit_token`    | string  | The Conan audit token to authenticate to the Audit server with Conan.                            |
 | `config_urls`    | list    | URLs of the Git repositories containing the custom Conan configurations to be installed.         |
 | `cache_packages` | boolean | Cache all stored Conan packages, under Conan cache, using Github cache support. false by default |
+| `python_version` | string  | Python version to be used with python-setup. By default is '3.10'                                |
 
 
 ## License
