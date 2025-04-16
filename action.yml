@@ -62,7 +62,7 @@ runs:
     - name: Get Conan cache folder path
       shell: bash
       id: get-conan-home
-      run: echo "conan-home=\"$(conan config home)\"" >> $GITHUB_OUTPUT
+      run: echo "conan-home=$(conan config home)" >> $GITHUB_OUTPUT
 
     - name: 'Configure Conan'
       if: ${{ inputs.config_urls != '' }}
