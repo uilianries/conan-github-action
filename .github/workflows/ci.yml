@@ -43,5 +43,7 @@ jobs:
       - name: Validate caching Conan packages
         shell: bash
         run: |
+          conan list "*#*"
           conan profile detect --force
           conan install -r conancenter --requires=asio/1.32.0 --build=missing
+          conan list "*#*"
