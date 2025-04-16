@@ -69,9 +69,10 @@ runs:
       id: configure-conan
       shell: bash
       run: |
-        IFS= read -ra urls <<< "${{ inputs.config_urls }}"
-        for url in "${urls[@]}"; do
+        echo "${{ inputs.config_urls }}" | while read -r url; do
+        if [ ! -z "$url" ]; then
           conan config install "$url"
+        fi
         done
 
     - name: 'Authenticate Audit'
