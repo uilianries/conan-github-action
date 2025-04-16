@@ -39,3 +39,9 @@ jobs:
           conan --version | grep -q '2.15.1'
           conan audit provider list | grep -q conancenter
           conan config home | grep -q "conan_home"
+
+      - name: Validate caching Conan packages
+        shell: bash
+        run: |
+          conan profile detect --force
+          conan install -r conancenter --requires=fmt/11.1.4 --build=missing
