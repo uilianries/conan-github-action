@@ -15,8 +15,7 @@ This action provides a simple and flexible way to set up Conan with custom confi
 - 🗂️ Cache Conan packages using GitHub cache
 - 🔍 Support for custom Conan cache directory
 - 🔗 Support for multiple configuration URL
-- 🧩 Support for multiple remote URL
-- 🐍 Python 3.9+ support
+- 🐍 Customize Python version setup
 - 💪 Cross-platform support
 - 🔄 Composite action for better reliability
 
