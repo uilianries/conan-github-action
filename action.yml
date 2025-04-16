@@ -23,10 +23,6 @@ inputs:
     description: 'Cache all Conan packages from the cache'
     required: false
     default: 'false'
-  remotes:
-    description: 'Conan remotes to be added. Use , (comma) to separate multiple remotes'
-    required: false
-    default: ''
 
 outputs:
   conan-version:
@@ -84,17 +80,6 @@ runs:
       shell: bash
       run: |
         conan audit provider auth conancenter --token=${{ inputs.audit_token }}
-
-    - name: 'Add Conan remotes'
-      if: ${{ inputs.remotes != '' }}
-      id: add-conan-remotes
-      shell: bash
-      run: |
-        IFS=',' read -ra remotes <<< "${{ inputs.remotes }}"
-        for i in "${!remotes[@]}"; do
-          conan remote add "remote-$i" "${remotes[$i]}"
-        done
-        conan remote list
 
     - name: 'Cache Conan packages'
       if: ${{ inputs.cache_packages == 'true' }}

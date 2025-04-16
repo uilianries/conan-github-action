@@ -23,7 +23,7 @@ This action provides a simple and flexible way to set up Conan with custom confi
 
 ### Basic Usage
 
-Install Conan, authenticate to Audit server, install custom configurations and configure remotes:
+Install Conan, authenticate to Audit server, install custom configurations:
 
 ```yaml
 steps:
@@ -35,7 +35,6 @@ steps:
     with:
       audit_token: ${{ secrets.CONAN_AUDIT_TOKEN }}
       config_urls: 'https://github.com/<org>/conan-config.git,https://myrepo.com/conan-config.git'
-      remotes: 'https://mycompany/artifactory/api/conan/conan-local,https://worldwide.org/artifactory/api/conan/conan-remote'
 
   - name: Install Conan dependencies
     run: conan install . --build=missing
@@ -54,7 +53,6 @@ It's possible to customize the action using the following options:
 | `audit_token`    | string  | The Conan audit token to authenticate to the Audit server with Conan.                                          |
 | `config_urls`    | list    | URLs of the Git repositories containing the custom Conan configurations to be installed. It's comma separated  |
 | `cache_packages` | boolean | Cache all stored Conan packages, under Conan cache, using Github cache support. false by default               |
-| `remotes`        | list    | A list of remote URLs to be added to the Conan configuration. It's comma separated.                            |
 
 
 ## License
